@@ -1,0 +1,26 @@
+body {
+    font-family: sans;
+    font-size: 1em;
+}
+
+p.error {
+    font-weight: bold;
+    color: red;
+}
+
+div.logout {
+    float: right;
+}
+
+.chatBoard{
+    width: 300px;
+    height: 200px;
+}
+
+.danmu-input {
+	display : none !important; 
+}
+
+.send-btn{
+	display : none !important; 
+}

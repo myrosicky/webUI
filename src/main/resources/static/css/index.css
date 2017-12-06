@@ -1,0 +1,44 @@
+.sidenav {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    background-color: #e7e7e7;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    float: left;
+}
+
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.content {
+    left: 12%;
+    position: fixed;
+    border: none;
+    top: 0px;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.5s;
+    height: 100%;
+    width: 88%;
+}
