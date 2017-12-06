@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>quota</title>                                                                                                          
+        <meta charset="utf-8" />                                      
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                       
+        <link rel="stylesheet" th:href="@{/css/quota.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/quota.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         	<table class="inputBoxGroup">
+         		<tr>
+						<td>
+	         			<label>user:</label><input type="text" ng-model="user" />
+	         			</td>
+						<td>
+	         			<label>month:</label><input type="text" ng-model="month" />
+	         			</td>
+						<td>
+	         			<label>time:</label><input type="text" ng-model="time" />
+	         			</td>
+						<td>
+	         			<label>year:</label><input type="text" ng-model="year" />
+	         			</td>
+						<td>
+	         			<label>state:</label><input type="text" ng-model="state" />
+	         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table class="queryButtonGroup">
+         		<tr> 
+         			<td>
+         			<input type="button" class="btn" ng-click="query()" value="query" />
+         			<input type="button" class="btn" ng-click="createNewQuota()" value="create new Quota" />
+         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table name="result" class="resultTable" >
+         		<tr>
+					<td>user</td>
+					<td>month</td>
+					<td>time</td>
+					<td>amount</td>
+					<td>year</td>
+					<td>state</td>
+					<td></td>
+         		</tr>
+         		<tr ng-repeat="x in results">
+						<td>{{x.user}}</td>
+						<td>{{x.month}}</td>
+						<td>{{x.time}}</td>
+						<td>{{x.amount}}</td>
+						<td>{{x.year}}</td>
+						<td>{{x.state}}</td>
+					<td>
+						<input type="button" class="btn" ng-click="changeMonthQuota(x.id)" value="changeMonthQuota" />
+						<input type="button" class="btn" ng-click="deleteMonthQuota(x.id)" value="deleteMonthQuota" />
+					</td>
+         		</tr>
+         	</table>
+         	
+         	
+         	<!-- The Modal -->
+			<div class="modal" ng-show="wannaCreateNew">
+			  <!-- Modal content -->
+			  <div class="modal-content">
+			    <span class="close" ng-click="closeCreateNewQuotaDialog()">&times;</span>
+			    
+			    <div class="alert" ng-show="alertContent.length > 0" >
+			    	{{alertContent}}
+				</div>
+			    <table class="inputBoxGroup">
+	         		<tr>
+						<td>
+	         			<label>month:</label><select ng-model="i_month" ng-options="x for (x, y) in monthOpts"></select> 
+	         			</td>
+						<td>
+	         			<label>amount:</label><input type="text" ng-model="i_amount" /> 
+	         			</td>
+						<td>
+	         			<label>year:</label><input type="text" ng-model="i_year" /> 
+	         			</td>
+	         		</tr>
+         		</table>
+         		<table class="queryButtonGroup">
+	         		<tr> 
+	         			<td>
+	         			<input type="button" class="btn" ng-click="saveMonthQuota()" value="save" />
+	         			</td>
+	         		</tr>
+         		</table>
+			  </div>
+			</div>
+         	
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

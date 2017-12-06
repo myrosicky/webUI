@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>menu</title>                                                                                                          
+        <meta charset="utf-8" />                                      
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                       
+        <link rel="stylesheet" th:href="@{/css/menu.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/menu.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         	<table class="inputBoxGroup">
+         		<tr>
+						<td>
+	         			<label>name:</label><input type="text" ng-model="name" />
+	         			</td>
+						<td>
+	         			<label>role:</label><input type="text" ng-model="role" />
+	         			</td>
+						<td>
+	         			<label>time:</label><input type="text" ng-model="time" />
+	         			</td>
+						<td>
+	         			<label>owner:</label><input type="text" ng-model="owner" />
+	         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table class="queryButtonGroup">
+         		<tr> 
+         			<td>
+         			<input type="button" class="btn" ng-click="getMenu()" value="query" />
+         			<input type="button" class="btn" ng-click="createNewMenu()" value="create new Menu" />
+         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table name="result" class="resultTable" >
+         		<tr>
+					<td>name</td>
+					<td>role</td>
+					<td>time</td>
+					<td>owner</td>
+					<td></td>
+         		</tr>
+         		<tr ng-repeat="x in results">
+						<td>{{x.name}}</td>
+						<td>{{x.role}}</td>
+						<td>{{x.time}}</td>
+						<td>{{x.owner}}</td>
+					<td>
+					</td>
+         		</tr>
+         	</table>
+         	
+         	
+         	<!-- The Modal -->
+			<div class="modal" ng-show="wannaCreateNew" >
+			  <!-- Modal content -->
+			  <div class="modal-content">
+			    <span class="close" ng-click="closeCreateNewMenuDialog()">&times;</span>
+			    
+			    <div class="alert" ng-show="alertContent.length > 0" >
+			    	{{alertContent}}
+				</div>
+			    <table class="inputBoxGroup">
+	         		<tr>
+						<td>
+	         			<label>name:</label><input type="text" ng-model="i_name" /> 
+	         			</td>
+						<td>
+	         			<label>role:</label><select ng-model="i_role" ng-options="x for (x, y) in roleOpts"></select> 
+	         			</td>
+	         		</tr>
+         		</table>
+         		<table class="queryButtonGroup">
+	         		<tr> 
+	         			<td>
+	         			<input type="button" class="btn" ng-click="saveMenu()" value="create" />
+	         			</td>
+	         		</tr>
+         		</table>
+			  </div>
+			</div>
+         	
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

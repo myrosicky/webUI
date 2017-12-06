@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>audit</title>                                                                                                          
+        <meta charset="utf-8" />                                      
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                       
+        <link rel="stylesheet" th:href="@{/css/audit.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/audit.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         	<table class="inputBoxGroup">
+         		<tr>
+						<td>
+	         			<label>start:</label><input type="text" ng-model="start" />
+	         			</td>
+						<td>
+	         			<label>destination:</label><input type="text" ng-model="destination" />
+	         			</td>
+						<td>
+	         			<label>time:</label><input type="text" ng-model="time" />
+	         			</td>
+						<td>
+	         			<label>operation:</label><input type="text" ng-model="operation" />
+	         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table class="queryButtonGroup">
+         		<tr> 
+         			<td>
+         			<input type="button" class="btn" ng-click="queryPendingApply()" value="query Pending Apply" />
+         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table name="result" class="resultTable" >
+         		<tr>
+					<td>start</td>
+					<td>destination</td>
+					<td>time</td>
+					<td>operation</td>
+					<td></td>
+         		</tr>
+         		<tr ng-repeat="x in results">
+						<td>{{x.start}}</td>
+						<td>{{x.destination}}</td>
+						<td>{{x.time}}</td>
+						<td>{{x.operation}}</td>
+					<td>
+						<input type="button" class="btn" ng-click="pass(x.city)" value="pass" />
+						<input type="button" class="btn" ng-click="reject(x.city)" value="reject" />
+						<input type="button" class="btn" ng-click="viewAuditHistory(x.city)" value="viewAuditHistory" />
+					</td>
+         		</tr>
+         	</table>
+         	
+         	
+         	<!-- The Modal -->
+			<div id="createNewAuditDialog" class="modal">
+			  <!-- Modal content -->
+			  <div class="modal-content">
+			    <span class="close" ng-click="closeCreateNewAuditDialog()">&times;</span>
+			    
+			    <table class="resultTable">
+				   	 	<tr>
+							<th >time</th>
+	         				<th >comment</th>
+	         				<th >operation</th>
+	         				<th >city</th>
+	         				<th >approver</th>
+		         		</tr>
+		         		<tr ng-repeat="x in approves">
+							<td >{{x.time}}</td>
+	         				<td >{{x.comment}}</td>
+	         				<td >{{x.operation}}</td>
+	         				<td >{{x.city}}</td>
+	         				<td >{{x.approver}}</td>
+		         		</tr>
+         		</table>
+			    
+         		<table class="queryButtonGroup">
+	         		<tr> 
+	         			<td>
+	         			<input type="button" class="btn" ng-click="close()" value="close" />
+	         			</td>
+	         		</tr>
+         		</table>
+			  </div>
+			</div>
+         	
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

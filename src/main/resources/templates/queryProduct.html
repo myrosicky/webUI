@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>queryProduct</title>                                                                                                          
+        <meta charset="utf-8" />                                      
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                       
+        <link rel="stylesheet" th:href="@{/css/queryProduct.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/queryProduct.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         	<table class="inputBoxGroup">
+         		<tr>
+						<td>
+	         			<label>name:</label><input type="text" ng-model="name" />
+	         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table class="queryButtonGroup">
+         		<tr> 
+         			<td>
+         			<input type="button" class="btn" ng-click="query()" value="query" />
+         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table name="result" class="resultTable" >
+         		<tr ng-repeat="x in results">
+					<td >
+						<a href="#" ng-href="#/product/{{x.id}}">
+							<p>{{x.name}}</p>
+							<p><img class="resultImg" src="/client/file/preview.do?fileID={{x.id}}" /></p>
+						</a>
+					</td>
+         		</tr>
+         	</table>
+         	
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

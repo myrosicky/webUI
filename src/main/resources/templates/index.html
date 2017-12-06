@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <meta charset="utf-8" />                                                                                                                      
+        <link rel="stylesheet" th:href="@{/css/index.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/index.js}"></script>
+        <title>rubbish system</title>
+    </head>                                                                                                                                           
+    <body>        
+    	<div ng-app="myapp" ng-controller="myCtrl"> 
+    	
+	    	<div id="mySidenav" class="sidenav">
+	    	  <p ng-repeat="x in menu"><a href="#"  ng-click="gotoPage(x.name)" >{{x.name}}</a></p>
+			  <a href="" ng-click="logout()" >Log out</a>
+			</div>
+			<iframe id="contentFrame" class="content"></iframe>
+			<form id="logoutForm" action="/client/logout" method="post">
+			</form>
+		</div>
+		
+    </body>                                                                                                                                          
+ </html>                                                                                                                                             

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>apply</title>                                                                                                          
+        <meta charset="utf-8" />  
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                                                       
+        <link rel="stylesheet" th:href="@{/css/apply.css}" />   
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script>    
+        <script th:src="@{/webjars/sockjs-client/1.0.2/sockjs.min.js}" ></script>
+    	<script th:src="@{/webjars/stomp-websocket/2.3.3/stomp.min.js}" ></script> 
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/apply.js}"></script>
+    </head>                                                                                                                                           
+    <body>     
+    <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+    
+         <div ng-app="myapp" ng-controller="myCtrl"> 
+         	<table class="inputBoxGroup">
+         		<tr>
+						<td>
+	         			<label>start:</label><input type="text" ng-model="start" />
+	         			</td>
+						<td>
+	         			<label>destination:</label><input type="text" ng-model="destination" />
+	         			</td>
+         		</tr>
+         	</table>
+         	<table class="queryButtonGroup">
+         		<tr> 
+         			<td>
+         			<input type="button" class="btn" ng-click="query()" value="query" />
+         			<input type="button" class="btn" ng-click="createNewApply()" value="create new apply" />
+         			</td>
+         		</tr>
+         	</table>
+         	
+         	<table name="result" class="resultTable">
+         		<tr>
+					<td>start</td>
+					<td>destination</td>
+					<td>time</td>
+					<td></td>
+         		</tr>
+         		<tr ng-repeat="x in results">
+						<td>{{x.start}}</td>
+						<td>{{x.destination}}</td>
+						<td>{{x.time}}</td>
+						<td>
+							<input type="button" class="btn" ng-click="delete(x.city)" value="delete" />
+							<input type="button" class="btn" ng-click="submit(x.city)" value="submit" />
+						</td>
+         		</tr>
+         	</table>
+         	
+         	<!-- The Modal -->
+			<div class="modal" ng-show="wannaCreateNew" >
+			  <!-- Modal content -->
+			  <div class="modal-content" >
+			    <span class="close" ng-click="closeCreateNewApplyDialog()">&times;</span>
+			    available apply quota: <span id="quota">{{quota}}</span>
+			    
+			    <div class="alert" ng-show="alertContent.length > 0" >
+			    	{{alertContent}}
+				</div>
+			    <table class="inputBoxGroup">
+			    	<tr>
+			    			<td colspan="2">
+	         						<img class="personalImg" ng-src="{{imgSrc}}" />
+	         						<label>personal image:</label>
+									<input type="file" name="file" file-model="i_file" />
+									<input type="submit" ng-click="uploadImage()" value="Upload" />
+	         				</td>
+			    	</tr>
+	         		<tr>
+							<td>
+		         			<label>start:</label><input type="text" ng-model="i_start" />
+		         			</td>
+							<td>
+		         			<label>destination:</label><input type="text" ng-model="i_destination" />
+		         			</td>
+	         		</tr>
+         		</table>
+         		<table class="queryButtonGroup">
+	         		<tr> 
+	         			<td>
+	         			<input type="button" class="btn" ng-click="save()" value="create" />
+	         			</td>
+	         		</tr>
+         		</table>
+			  </div>
+			</div>
+			
+			
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

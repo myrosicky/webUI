@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>File</title>                                                                                                          
+        <meta charset="utf-8" />                                                                                                                      
+        <link rel="stylesheet" th:href="@{/css/main.css}" />   
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script type="text/javascript"  th:src="@{/js/file.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         	<table>
+         		<tr>
+         			<td>
+         			<label>file name:</label><input type="text" ng-model="name" />
+         			</td>
+         			<td>
+         			<label>log level:</label><input type="text" ng-model="logLevel" />
+         			</td>
+         			<td>
+         			<label>date:</label><input type="text" ng-model="dateFrom" />-<input type="text" ng-model="dateTo" />
+         			</td>
+         		</tr>
+         		<tr>
+         			<td>
+         			<label>search content:</label><input type="text" ng-model="searchContent" />
+         			</td>
+         			<td>
+         			<label>result amount:</label><input type="text" ng-model="amount" />
+         			</td>
+         		</tr>
+         		<tr>
+         			<td>
+	         		 <button ng-click="analyzeLog()">query</button>
+	         		</td>
+         		</tr>
+         	</table>
+         	
+         	<table>
+	         	<tr >
+	         		<td>date</td>
+         			<td>logLevel</td>
+         			<td>classSimpleName</td>
+         			<td>detailMsg</td>
+	         	</tr>
+         		<tr ng-repeat="log in logs">
+         			<td>{{ log.dateStr }}</td>
+         			<td>{{ log.logLevel }}</td>
+         			<td>{{ log.classSimpleName }}</td>
+         			<td>{{ log.detailMsg }}</td>
+         		</tr>
+         	</table>
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             

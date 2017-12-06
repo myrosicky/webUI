@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"> 
+    <head>                                                                                                                                            
+        <title>chatRoom</title>                                                                                                          
+        <meta charset="utf-8" />                                      
+        <link rel="stylesheet" th:href="@{/css/base.css}" />                                                                                       
+        <link rel="stylesheet" th:href="@{/css/chatRoom.css}" />   
+		<link rel="stylesheet" th:href="@{/css/danmu/danmuplayer.css}" />   
+		<script type="text/javascript"  th:src="@{/webjars/angularjs/1.6.4/angular.min.js}"></script>
+        <script type="text/javascript" th:src="@{/webjars/angularjs/1.6.4/angular-route.js}" ></script> 
+        <script th:src="@{/webjars/sockjs-client/1.0.2/sockjs.min.js}" ></script>
+    	<script th:src="@{/webjars/stomp-websocket/2.3.3/stomp.min.js}" ></script>
+        <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
+        <script type="text/javascript"  th:src="@{/js/danmu/danmuplayer.min.js}"></script>
+        <script type="text/javascript"  th:src="@{/js/chatRoom.js}"></script>
+    </head>                                                                                                                                           
+    <body>                                                                                                                                            
+         <div ng-app="myApp" ng-controller="myCtrl"> 
+         
+         <div id="danmup"></div>
+         
+         <textarea id="chatBoard" class="chatBoard" >
+         
+         </textarea>
+         	
+         	<table class="inputBoxGroup">
+	         		<tr>
+						<td>
+	         			<label>comment:</label><input type="text" ng-model="i_comment" /> 
+	         			<input type="button" class="btn" ng-disabled="!connected" ng-click="send()" value="send" />
+	         			</td>
+	         		</tr>
+       		</table>
+         	
+         </div>
+     </body>                                                                                                                                          
+ </html>                                                                                                                                             
