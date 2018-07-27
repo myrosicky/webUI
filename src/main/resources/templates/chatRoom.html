@@ -12,12 +12,16 @@
     	<script th:src="@{/webjars/stomp-websocket/2.3.3/stomp.min.js}" ></script>
         <script type="text/javascript" th:src="@{/webjars/jquery/2.1.1/jquery.min.js}" ></script>
         <script type="text/javascript"  th:src="@{/js/danmu/danmuplayer.min.js}"></script>
+        <script type="text/javascript"  th:src="@{/js/danmu/jquery.danmu.min.js}"></script>
+        <script type="text/javascript"  th:src="@{/js/flowplayer/flowplayer-3.2.13.min.js}"></script>
         <script type="text/javascript"  th:src="@{/js/chatRoom.js}"></script>
     </head>                                                                                                                                           
     <body>                                                                                                                                            
          <div ng-app="myApp" ng-controller="myCtrl"> 
          
-         <div id="danmup"></div>
+		<div id="liveStreamPlayer" style="width:644px;height:276px;margin:0 auto;text-align:center">
+		</div>
+		
          
          <textarea id="chatBoard" class="chatBoard" >
          

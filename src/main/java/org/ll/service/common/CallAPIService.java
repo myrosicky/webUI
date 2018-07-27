@@ -1,12 +1,69 @@
 package org.ll.service.common;
-import java.util.Map;import java.util.Map.Entry;
-import org.ll.util.Util;import org.slf4j.Logger;import org.slf4j.LoggerFactory;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.beans.factory.annotation.Value;import org.springframework.http.ResponseEntity;import org.springframework.http.client.ClientHttpRequest;import org.springframework.security.oauth2.client.DefaultOAuth2RequestAuthenticator;import org.springframework.security.oauth2.client.OAuth2ClientContext;import org.springframework.security.oauth2.client.OAuth2RequestAuthenticator;import org.springframework.security.oauth2.client.OAuth2RestOperations;import org.springframework.security.oauth2.client.OAuth2RestTemplate;import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;import org.springframework.stereotype.Service;import org.springframework.web.client.RestClientException;
-@Servicepublic class CallAPIService {
-    private static final Logger log = LoggerFactory.getLogger(CallAPIService.class);
-    @Value("${api.protocol}")    private String protocol;
-    @Value("${api.domain}")    private String domain;
-    @Value("${api.port}")    private String port;        @Autowired    private OAuth2RestOperations restTemplate;        @Autowired    ResourceServerTokenServices tokenServices;        public <T> T postRestful(String url, Class<T> clazz, Object object) {        String tmpUrl = getFullURL(url);        log.debug("post restTemplate.getAccessToken().getValue():" + restTemplate.getAccessToken().getValue());        ResponseEntity<T> rtnFlag;        try {            rtnFlag = restTemplate.postForEntity(tmpUrl, object, clazz);            return rtnFlag.getBody();        } catch (RestClientException e) {            log.error("", e);        }        return null;            }
-    public String getRestful(String url, Map<String, ?> params) {        return getRestful(url, String.class, params);    }
-    public <T, X> T getRestful(String url, Class<T> clazz, X obj) {        return (T) getRestful(url, clazz, Util.convert(obj, Map.class));    }        public <T> T getRestful(String url, Class<T> clazz, Map<String, ?> params) {        StringBuilder tmpUrl = new StringBuilder(80);        tmpUrl.append(getFullURL(url)).append("?");        for (Entry<String, ?> entry : params.entrySet()) {            tmpUrl.append(entry.getKey()).append("=").append(entry.getValue()).append("&");        }        tmpUrl.deleteCharAt(tmpUrl.length() - 1);                ResponseEntity<T> resp = restTemplate.getForEntity(tmpUrl.toString(), clazz);        return resp.getBody();    }
-    private String getFullURL(String particialUrl) {        StringBuilder sb = new StringBuilder(20 + particialUrl.length());        sb.append(protocol).append("://").append(domain).append(":").append(port).append(particialUrl);        return sb.toString();    }        public void deleteToken(){//        restTemplate.getOAuth2ClientContext().removePreservedState("state");        ((OAuth2RestTemplate)restTemplate).setAuthenticator(new OAuth2RequestAuthenticator(){
-            @Override            public void authenticate(OAuth2ProtectedResourceDetails resource, OAuth2ClientContext clientContext,                ClientHttpRequest request) {                            }});//        tokenStore.removeAccessToken(restTemplate.getAccessToken());//        DefaultOAuth2AccessToken emptyToken = new DefaultOAuth2AccessToken("");//        emptyToken.setValue(null);//        restTemplate.getOAuth2ClientContext().setAccessToken(emptyToken);        restTemplate.getOAuth2ClientContext().getAccessTokenRequest().getHeaders().remove("Authorization");        postRestful("/oauth/users/delete_tokens/" + restTemplate.getAccessToken().getValue(), int.class, null);        ((OAuth2RestTemplate)restTemplate).setAuthenticator(new DefaultOAuth2RequestAuthenticator());        //        restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setAuthorizationCode("");//        restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setCookie("");//        restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setExistingToken(new DefaultOAuth2AccessToken(""));//        restTemplate.getOAuth2ClientContext().getAccessTokenRequest().clear();    }}
+
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.ll.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CallAPIService {
+
+	private final static Logger log = LoggerFactory.getLogger(CallAPIService.class);
+	
+	@Value("${api.protocol}")
+	private String protocol;
+	
+	@Value("${api.host}")
+	private String host;
+	
+	@Value("${api.port}")
+	private String port;
+	
+	@Autowired
+	private OAuth2RestOperations restTemplate;
+
+	public void delete(String url, Object reqBody) {
+		restTemplate.delete(url, reqBody);
+	}
+	
+	public void put(String url, Object reqBody) {
+		restTemplate.put(url, reqBody);
+	}
+	
+	public <T> T post(String url, Class<T> rtnClass, Object reqBody) {
+		return restTemplate.postForObject(buildFullAPIURL(url), reqBody, rtnClass);
+	}
+	
+	private String buildFullAPIURL(String apiMethodUrl){
+		return buildFullAPIURL(apiMethodUrl, null);
+	}
+	private String buildFullAPIURL(String apiMethodUrl, Map<String, String> reqParams){
+		StringBuilder sb = 
+				new StringBuilder(50)
+		.append(protocol).append("://").append(host).append(":").append(port).append("/api/").append(apiMethodUrl)
+		;
+		
+		if(reqParams != null && !reqParams.isEmpty()){
+			sb.append("?");
+			for(Entry<String, String> entry : reqParams.entrySet()){
+				sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+			}
+			sb.deleteCharAt(sb.length() - 1 );
+		}
+		return sb.toString();
+	}
+
+
+	public <T>  T get(String url, Class<T> rtnClass, Object reqParams) {
+		Map<String, String> parsedReqParams = (Map<String, String>) Util.convert(reqParams, Map.class);
+		return restTemplate.getForObject(buildFullAPIURL(url, parsedReqParams), rtnClass);
+	}
+
+	
+}
