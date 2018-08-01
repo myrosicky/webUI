@@ -1,9 +1,5 @@
 package org.ll.util;
 
-import java.util.Map;
-
-import org.ll.model.ApplyDO;
-
 import com.google.gson.Gson;
 
 public class Util {

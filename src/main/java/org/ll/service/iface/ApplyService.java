@@ -3,17 +3,16 @@ package org.ll.service.iface;
 
 import java.util.List;
 
-import org.ll.exception.AppException;
-import org.ll.model.ApplyDO;
+import org.stockws.model.Apply;
 
 public interface ApplyService {
 
-    public int save(ApplyDO applyDO);
+    public int save(Apply Apply);
 
-    public int delete(ApplyDO applyDO);
+    public int delete(Apply Apply);
 
-    public List<ApplyDO> query(ApplyDO applyDO);
+    public List<Apply> query(Apply Apply);
 
-    public int submit(ApplyDO applyDO);
+    public int submit(Apply Apply);
 
 }

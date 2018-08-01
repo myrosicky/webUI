@@ -1,5 +1,8 @@
 package org.ll.controller;
 
+import java.util.List;
+
+import org.ll.service.iface.ApproveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import java.util.List;
-import org.ll.service.iface.ApproveService;
-import org.ll.model.ApplyDO;
-import org.ll.model.ApproveDO;
+import org.stockws.model.Apply;
+import org.stockws.model.ApproveDO;
 
 @Controller
 @RequestMapping("/approve")
@@ -35,20 +36,20 @@ public class ApproveController {
 
     @RequestMapping(value = "/queryPendingApply.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ApplyDO> queryPendingApply(ApproveDO approveDO) {
+    public List<Apply> queryPendingApply(ApproveDO approveDO) {
         return approveService.queryPendingApply(approveDO);
     }
 
     @RequestMapping(value = "/approve.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public int approve(@RequestBody ApplyDO applyDO) {
-        return approveService.approve(applyDO);
+    public int approve(@RequestBody Apply Apply) {
+        return approveService.approve(Apply);
     }
 
     @RequestMapping(value = "/reject.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public int reject(@RequestBody ApplyDO applyDO) {
-        return approveService.reject(applyDO);
+    public int reject(@RequestBody Apply Apply) {
+        return approveService.reject(Apply);
     }
 
     @RequestMapping(value = "/viewApproveHistory.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")

@@ -4,8 +4,6 @@ package org.ll.service.iface;
 import java.util.List;
 
 import org.ll.model.QuotaDO;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 
 public interface QuotaService {
 

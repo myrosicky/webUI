@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestOperations;
 
 @Service
 public class CallAPIService {
@@ -25,8 +26,15 @@ public class CallAPIService {
 	@Value("${api.port}")
 	private String port;
 	
+	@Value("${api.context}")
+	private String context;
+	
+	
+	
 	@Autowired
-	private OAuth2RestOperations restTemplate;
+//	private OAuth2RestOperations restTemplate;
+	private RestOperations restTemplate;
+	
 
 	public void delete(String url, Object reqBody) {
 		restTemplate.delete(url, reqBody);
@@ -46,7 +54,7 @@ public class CallAPIService {
 	private String buildFullAPIURL(String apiMethodUrl, Map<String, String> reqParams){
 		StringBuilder sb = 
 				new StringBuilder(50)
-		.append(protocol).append("://").append(host).append(":").append(port).append("/api/").append(apiMethodUrl)
+		.append(protocol).append("://").append(host).append(":").append(port).append(context).append("/").append(apiMethodUrl)
 		;
 		
 		if(reqParams != null && !reqParams.isEmpty()){

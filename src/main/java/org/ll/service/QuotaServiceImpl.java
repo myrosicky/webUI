@@ -1,17 +1,13 @@
 package org.ll.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.ll.model.QuotaDO;
 import org.ll.service.common.CallAPIService;
 import org.ll.service.iface.QuotaService;
-import org.ll.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 
 @Service

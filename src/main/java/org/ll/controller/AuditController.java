@@ -1,5 +1,8 @@
 package org.ll.controller;
 
+import java.util.List;
+
+import org.ll.service.iface.AuditService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import java.util.List;
-import org.ll.service.iface.AuditService;
-import org.ll.model.ApplyDO;
-import org.ll.model.AuditDO;
+import org.stockws.model.Apply;
+import org.stockws.model.AuditDO;
 
 @Controller
 @RequestMapping("/audit")
@@ -35,25 +36,25 @@ public class AuditController {
 
     @RequestMapping(value = "/queryPendingApply.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ApplyDO> queryPendingApply(AuditDO auditDO) {
+    public List<Apply> queryPendingApply(AuditDO auditDO) {
         return auditService.queryPendingApply(auditDO);
     }
 
     @RequestMapping(value = "/pass.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public int pass(@RequestBody ApplyDO apply) {
+    public int pass(@RequestBody Apply apply) {
         return auditService.pass(apply);
     }
 
     @RequestMapping(value = "/reject.do", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public int reject(@RequestBody ApplyDO apply) {
+    public int reject(@RequestBody Apply apply) {
         return auditService.reject(apply);
     }
 
     @RequestMapping(value = "/viewAuditHistory.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ApplyDO> viewAuditHistory(AuditDO auditDO) {
+    public List<Apply> viewAuditHistory(AuditDO auditDO) {
         return auditService.viewAuditHistory(auditDO);
     }
 

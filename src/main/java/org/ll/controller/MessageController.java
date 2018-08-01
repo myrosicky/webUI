@@ -1,7 +1,5 @@
 package org.ll.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.ll.model.ChatCommentDO;
 import org.ll.model.QuotaDO;
 import org.ll.service.iface.QuotaService;
@@ -13,7 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MessageController {

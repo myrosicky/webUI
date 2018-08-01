@@ -28,6 +28,7 @@ api:
   protocol: http
   host: localhost
   port: 8090
+  context: /api
 
 
 ############## file ##############
