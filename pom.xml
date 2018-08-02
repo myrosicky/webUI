@@ -157,7 +157,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>worm</finalName>
+		<finalName>webUI</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
