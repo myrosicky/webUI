@@ -2,7 +2,7 @@ var app = angular.module('myapp', ["ngRoute"]);
 
 app.controller('myCtrl',  function($scope, $location, $http) {
 
-	$http.get("/client/menu/getMenu.do",
+	$http.get("/menu/getMenu.do",
         	{
 	        params: {}
         }).then(
@@ -15,16 +15,16 @@ app.controller('myCtrl',  function($scope, $location, $http) {
        );
 	
 	$scope.gotoPage = function(module){
-		jQuery("#contentFrame").attr("src", "/client/" + module );
+		jQuery("#contentFrame").attr("src", "/" + module );
 	};	
 	
 	$scope.logout = function() {
 //		jQuery("#logoutForm").submit();
-	      $http.post("/client/logout",
+	      $http.post("/logout",
 		        	{} 
 		        ).then(
 		       		function(response) {
-		    	        window.location = "/client/login";
+		    	        window.location = "/login";
 		   		    }, 
 		   		    function(response) {
 		   		    }

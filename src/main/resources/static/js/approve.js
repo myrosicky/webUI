@@ -2,7 +2,7 @@ var approveApp = angular.module('myApp', ["ngRoute"]);
 approveApp.controller('myCtrl',  function($scope, $http) {
 
 	$scope.query = function(){
-		$http.get("/client/approve/query.do",
+		$http.get("/approve/query.do",
 	        	{
 		        params: { 
 						'id': $scope.id, 
@@ -24,7 +24,7 @@ approveApp.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.queryPendingApply = function(){
-		 $http.get("/client/approve/queryPendingApply.do",
+		 $http.get("/approve/queryPendingApply.do",
 	        	{
 			 		params: {
 			 		}
@@ -40,7 +40,7 @@ approveApp.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.approve = function(city){
-		 $http.post("/client/approve/approve.do",
+		 $http.post("/approve/approve.do",
 	        	{
 						'city': city
 				}
@@ -55,7 +55,7 @@ approveApp.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.reject = function(city){
-		 $http.post("/client/approve/reject.do",
+		 $http.post("/approve/reject.do",
 	        	{
 						'city': city
 				}
@@ -71,7 +71,7 @@ approveApp.controller('myCtrl',  function($scope, $http) {
 	};	
 	$scope.viewApproveHistory = function(city){
 		 jQuery("#approveHistoryDialog").show();
-		 $http.get("/client/approve/viewApproveHistory.do",
+		 $http.get("/approve/viewApproveHistory.do",
 	        	{
 			 		params: {
 						'city': city 

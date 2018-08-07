@@ -3,7 +3,7 @@ var app = angular.module('myApp', ["ngRoute"]);
 app.config(function($routeProvider) {
 	  $routeProvider
 		  .when("/product/:id", {
-		    templateUrl : "/client/product.html"
+		    templateUrl : "/product.html"
 		   });
 	}); 
 
@@ -12,7 +12,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	$scope.alertContent = "";
 
 	$scope.query = function(){
-		$http.get("/client/queryProduct/query.do",
+		$http.get("/queryProduct/query.do",
 	        	{
 		        params: { 
 						'name': $scope.name

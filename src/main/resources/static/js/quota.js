@@ -20,7 +20,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	$scope.alertContent = "";
 
 	$scope.query = function(){
-		$http.get("/client/quota/query.do",
+		$http.get("/quota/query.do",
 	        	{
 		        params: { 
 						'user': $scope.user, 
@@ -40,7 +40,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	  $scope.saveMonthQuota = function(){
-		 $http.post("/client/quota/saveMonthQuota.do",
+		 $http.post("/quota/saveMonthQuota.do",
 	        	{
 						'month': $scope.i_month, 
 						'amount': $scope.i_amount, 
@@ -60,7 +60,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	};	
 	   $scope.changeMonthQuota = function(id){
 		 $scope.createNewQuota();
-		 $http.get("/client/quota/query.do",
+		 $http.get("/quota/query.do",
 		        	{	params: {
 							'id': id
 		        		}
@@ -80,7 +80,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.deleteMonthQuota = function(id){
-		   $http.post("/client/quota/deleteMonthQuota.do",
+		   $http.post("/quota/deleteMonthQuota.do",
 		        	{
 							'id': id 
 					}

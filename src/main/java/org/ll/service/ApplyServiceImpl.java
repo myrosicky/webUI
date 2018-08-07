@@ -40,7 +40,7 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     public List<Apply> query(Apply apply) {
-        return callAPIService.get("/applys/" + apply.getCountry() + "/" + apply.getArea() + "/" + apply.getCity(), List.class, apply);
+        return callAPIService.get("/applys/area/" + apply.getArea() + "/country/" + apply.getCountry() + "/province/" + apply.getProvince() + "/city/" + apply.getCity(), List.class, null);
     }
 
     @Override

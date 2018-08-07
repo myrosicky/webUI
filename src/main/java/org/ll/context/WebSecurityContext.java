@@ -28,6 +28,7 @@ import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -49,10 +50,6 @@ public class WebSecurityContext extends WebSecurityConfigurerAdapter {
 //    @Autowired
 //    private ResourceServerProperties resource;
     
-//    @Autowired(required=false)
-//    @Lazy
-//    private CallAPIService callAPIService;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -62,6 +59,21 @@ public class WebSecurityContext extends WebSecurityConfigurerAdapter {
             .anyRequest().hasRole("FRONT_USER")
         .and()
         	.formLogin().permitAll()
+        	.successHandler(new SavedRequestAwareAuthenticationSuccessHandler(){
+
+				@Override
+				public void onAuthenticationSuccess(HttpServletRequest request,
+						HttpServletResponse response,
+						Authentication authentication) throws ServletException,
+						IOException {
+					HttpSession session = request.getSession(false);
+					if(session != null){
+						session.setMaxInactiveInterval(600);
+					}
+					super.onAuthenticationSuccess(request, response, authentication);
+				}
+        		
+        	})
 //        .and()
 //            .exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
         .and()

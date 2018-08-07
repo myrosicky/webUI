@@ -1,3 +1,4 @@
+##################### logging #####################
 logging:
   level:
     org:
@@ -6,13 +7,15 @@ logging:
         security: DEBUG
         web: DEBUG
         
-server:
-  contextPath: /client
+#server:
+#  contextPath: /client
 
+##################### spring #####################
 spring:
   thymeleaf:
     cache: false
 
+##################### security #####################
 security:
   oauth2:
     client:
@@ -22,7 +25,8 @@ security:
       userAuthorizationUri: http://${api.domain}:${api.port}/oauth/authorize
     resource:
       userInfoUri: http://${api.host}:${api.port}/me
-      
+
+##################### api #####################      
 api:
   client:
     clientId: api_client
@@ -50,8 +54,3 @@ api:
 #github.client.userAuthorizationUri=https://github.com/login/oauth/authorize
 #github.client.clientAuthenticationScheme=form
 #github.resource.userInfoUri=https://api.github.com/user
-
-#server.port=8443
-#server.ssl.key-store=classpath:worm.jks
-#server.ssl.key-store-password=wormworm
-#server.ssl.key-password=wormworm

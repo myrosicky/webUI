@@ -69,9 +69,12 @@ public class CallAPIService {
 
 
 	public <T>  T get(String url, Class<T> rtnClass, Object reqParams) {
-		Map<String, String> parsedReqParams = (Map<String, String>) Util.convert(reqParams, Map.class);
+		
+		Map<String, String> parsedReqParams = null;
+		if(reqParams != null){
+			parsedReqParams = (Map<String, String>) Util.convert(reqParams, Map.class);
+		}
 		return restTemplate.getForObject(buildFullAPIURL(url, parsedReqParams), rtnClass);
 	}
-
 	
 }

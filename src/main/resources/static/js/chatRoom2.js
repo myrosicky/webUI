@@ -7,7 +7,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	}, 1000);
 	$scope.connect = function(){
 		if(!$scope.connected){
-			var socket = new SockJS('/client/gs-guide-websocket');
+			var socket = new SockJS('/gs-guide-websocket');
 			$scope.stompClient = Stomp.over(socket);
 			$scope.stompClient.connect({}, function (frame) {
 			    console.log('Connected: ' + frame);

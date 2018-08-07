@@ -9,7 +9,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	$scope.alertContent = "";
 
 	$scope.getMenu = function(){
-		$http.get("/client/menu/getMenu.do",
+		$http.get("/menu/getMenu.do",
 	        	{
 		        params: { 
 						'name': $scope.name, 
@@ -28,7 +28,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	 };	
 	
 	  $scope.saveMenu = function(){
-		 $http.post("/client/menu/saveMenu.do",
+		 $http.post("/menu/saveMenu.do",
 	        	{
 						'name': $scope.i_name, 
 						'role': $scope.i_role

@@ -4,7 +4,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	
 	
 	$scope.queryPendingApply = function(){
-		$http.get("/client/audit/queryPendingApply.do",
+		$http.get("/audit/queryPendingApply.do",
 	        	{
 		        params: { 
 						'start': $scope.start, 
@@ -23,7 +23,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.pass = function(city){
-		 $http.post("/client/audit/pass.do",
+		 $http.post("/audit/pass.do",
 	        	{
 						'city': city
 				}
@@ -38,7 +38,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	       
 	};	
 	$scope.reject = function(city){
-		 $http.post("/client/audit/reject.do",
+		 $http.post("/audit/reject.do",
 	        	{
 						'city': city
 				}
@@ -54,7 +54,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	};	
 	$scope.viewAuditHistory = function(city){
 		jQuery("#createNewAuditDialog").show();
-		$http.get("/client/audit/viewAuditHistory.do",
+		$http.get("/audit/viewAuditHistory.do",
 	        	{
 		        params: { 
 						'city': city

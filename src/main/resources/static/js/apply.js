@@ -39,7 +39,7 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 
 	$scope.connect = function(){
 		if(!$scope.connected){
-			var socket = new SockJS('/client/gs-guide-websocket');
+			var socket = new SockJS('/gs-guide-websocket');
 			$scope.stompClient = Stomp.over(socket);
 			$scope.stompClient.connect({}, function (frame) {
 		    console.log('Connected: ' + frame);
@@ -71,7 +71,7 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	setInterval($scope.queryQuota, 30000);
 	$scope.queryQuota = function() {
 		//$scope.stompClient.send("/app/queryQuota", {}, JSON.stringify({'month': '9'}));
-		$http.get("/client/quota/queryCurrentMonth.do",
+		$http.get("/quota/queryCurrentMonth.do",
 	        	{
 		        params: {}
 	        }).then(
@@ -87,11 +87,12 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	};
 
 	$scope.query = function(){
-		$http.get("/client/apply/query.do",
+		$http.get("/apply/query.do",
 	        	{
 		        params: { 
-						'start': $scope.start, 
-						'destination': $scope.destination
+						'area': $scope.area, 
+						'country': $scope.country,
+						'city': $scope.city
 				}
 	        }).then(
 	       		function(response) {
@@ -109,10 +110,10 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 			$scope.alertContent = "Apologize! no enough quota!";
 			return;
 		}
-		$http.post("/client/apply/save.do",
+		$http.post("/apply/save.do",
 	        	{
-						'start': $scope.i_start, 
-						'destination': $scope.i_destination,
+						'area': $scope.i_area, 
+						'country': $scope.i_country,
 						'image': $scope.imgID
 				}
 	        ).then(
@@ -128,7 +129,7 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	
 	$scope.delete = function(city){
 		
-		$http.post("/client/apply/delete.do",
+		$http.post("/apply/delete.do",
 	        	{
 						'city': city
 				}
@@ -143,7 +144,7 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	};
 	
 	$scope.submit = function(city){
-		$http.post("/client/apply/submit.do",
+		$http.post("/apply/submit.do",
 	        	{
 						'city': city
 	        	}
@@ -159,8 +160,8 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	
 	$scope.createNewApply = function(){
 		$scope.wannaCreateNew = true;
-		$scope.i_start = "";
-		$scope.i_destination = "";
+		$scope.i_area = "";
+		$scope.i_country = "";
 		$scope.alertContent = "";
 		$scope.connect();
 	};
@@ -170,9 +171,9 @@ applyApp.controller('myCtrl',  function($scope, $http, fileUpload) {
 	};
 	
 	$scope.uploadImage = function(){
-        fileUpload.uploadFileToUrl($scope.i_file, "/client/file/upload.do", 
+        fileUpload.uploadFileToUrl($scope.i_file, "/file/upload.do", 
         		function(data){
-        			$scope.imgSrc = "/client/file/preview.do?fileID=" + data;
+        			$scope.imgSrc = "/file/preview.do?fileID=" + data;
         			$scope.imgID = data;
         		}
         );

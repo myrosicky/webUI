@@ -8,7 +8,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	jQuery(function(){
 		
 		
-		flowplayer("liveStreamPlayer", "http://localhost:9090/client/flowplayer/flowplayer-3.2.18.swf", {
+		flowplayer("liveStreamPlayer", "http://localhost:9090/flowplayer/flowplayer-3.2.18.swf", {
 			 
 		    clip: {
 		        url: 'livestream', // stream name
@@ -20,7 +20,7 @@ app.controller('myCtrl',  function($scope, $http) {
 		    plugins: {
 		 
 		        hddn: {
-		            url: "http://localhost:9090/client/flowplayer.rtmp/flowplayer.rtmp-3.2.13.swf", // no need to change
+		            url: "http://localhost:9090/flowplayer.rtmp/flowplayer.rtmp-3.2.13.swf", // no need to change
 		 
 //		            netConnectionUrl: 'rtmp://localhost:1953/oflaDemo'
 		            netConnectionUrl: 'rtmp://localhost:1935/live'
@@ -50,7 +50,7 @@ app.controller('myCtrl',  function($scope, $http) {
 	
 	$scope.connect = function(){
 		if(!$scope.connected){
-			var socket = new SockJS('/client/gs-guide-websocket');
+			var socket = new SockJS('/gs-guide-websocket');
 			$scope.stompClient = Stomp.over(socket);
 			$scope.stompClient.connect({}, function (frame) {
 			    console.log('Connected: ' + frame);

@@ -21,10 +21,13 @@
          	<table class="inputBoxGroup">
          		<tr>
 						<td>
-	         			<label>start:</label><input type="text" ng-model="start" />
+	         			<label>area:</label><input type="text" ng-model="area" />
 	         			</td>
 						<td>
-	         			<label>destination:</label><input type="text" ng-model="destination" />
+	         			<label>country:</label><input type="text" ng-model="country" />
+	         			</td>
+	         			<td>
+	         			<label>city:</label><input type="text" ng-model="city" />
 	         			</td>
          		</tr>
          	</table>
@@ -39,15 +42,16 @@
          	
          	<table name="result" class="resultTable">
          		<tr>
-					<td>start</td>
-					<td>destination</td>
+					<td>area</td>
+					<td>country</td>
 					<td>time</td>
 					<td></td>
          		</tr>
          		<tr ng-repeat="x in results">
-						<td>{{x.start}}</td>
-						<td>{{x.destination}}</td>
-						<td>{{x.time}}</td>
+						<td>{{x.area}}</td>
+						<td>{{x.country}}</td>
+						<td>{{x.province}}</td>
+						<td>{{x.city}}</td>
 						<td>
 							<input type="button" class="btn" ng-click="delete(x.city)" value="delete" />
 							<input type="button" class="btn" ng-click="submit(x.city)" value="submit" />
@@ -76,10 +80,10 @@
 			    	</tr>
 	         		<tr>
 							<td>
-		         			<label>start:</label><input type="text" ng-model="i_start" />
+		         			<label>area:</label><input type="text" ng-model="i_area" />
 		         			</td>
 							<td>
-		         			<label>destination:</label><input type="text" ng-model="i_destination" />
+		         			<label>country:</label><input type="text" ng-model="i_country" />
 		         			</td>
 	         		</tr>
          		</table>
