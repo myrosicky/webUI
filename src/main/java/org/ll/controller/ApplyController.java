@@ -2,6 +2,7 @@ package org.ll.controller;
 
 import java.util.List;
 
+import org.ll.models.applysystem.Apply;
 import org.ll.service.iface.ApplyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.stockws.model.Apply;
 
 @Controller
 @RequestMapping("/apply")

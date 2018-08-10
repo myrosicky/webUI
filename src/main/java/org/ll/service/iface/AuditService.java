@@ -3,8 +3,8 @@ package org.ll.service.iface;
 
 import java.util.List;
 
-import org.stockws.model.Apply;
-import org.stockws.model.AuditDO;
+import org.ll.models.applysystem.Apply;
+import org.ll.models.applysystem.AuditDO;
 
 public interface AuditService {
 

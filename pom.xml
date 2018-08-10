@@ -132,11 +132,9 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.ll</groupId>
-				<artifactId>crmws-model</artifactId>
-				<version>0.0.1</version>
-				<systemPath>${basedir}/lib/crmws-models.jar</systemPath>
-				<scope>system</scope>
+			<groupId>org.ll</groupId>
+			<artifactId>models</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

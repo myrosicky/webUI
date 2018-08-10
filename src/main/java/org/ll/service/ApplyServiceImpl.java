@@ -2,13 +2,13 @@ package org.ll.service;
 
 import java.util.List;
 
+import org.ll.models.applysystem.Apply;
 import org.ll.service.common.CallAPIService;
 import org.ll.service.iface.ApplyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.stockws.model.Apply;
 
 @Service
 public class ApplyServiceImpl implements ApplyService {

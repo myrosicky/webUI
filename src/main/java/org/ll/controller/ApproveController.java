@@ -2,6 +2,8 @@ package org.ll.controller;
 
 import java.util.List;
 
+import org.ll.models.applysystem.Apply;
+import org.ll.models.applysystem.ApproveDO;
 import org.ll.service.iface.ApproveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.stockws.model.Apply;
-import org.stockws.model.ApproveDO;
 
 @Controller
 @RequestMapping("/approve")

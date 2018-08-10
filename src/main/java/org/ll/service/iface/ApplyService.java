@@ -3,7 +3,7 @@ package org.ll.service.iface;
 
 import java.util.List;
 
-import org.stockws.model.Apply;
+import org.ll.models.applysystem.Apply;
 
 public interface ApplyService {
 
