@@ -3,8 +3,8 @@ package org.ll.service;
 import java.util.List;
 import java.util.Map;
 
-import org.ll.models.applysystem.Apply;
-import org.ll.models.applysystem.ApproveDO;
+import org.business.models.applysystem.Apply;
+import org.business.models.applysystem.ApproveDO;
 import org.ll.service.common.CallAPIService;
 import org.ll.service.iface.ApproveService;
 import org.ll.util.Util;

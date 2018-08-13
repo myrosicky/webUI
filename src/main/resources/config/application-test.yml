@@ -7,9 +7,6 @@ logging:
         security: DEBUG
         web: DEBUG
         
-#server:
-#  contextPath: /client
-
 ##################### spring #####################
 spring:
   thymeleaf:
@@ -33,8 +30,8 @@ api:
     clientSecret: secret
     accessTokenUri: http://${auth.host}:${auth.port}/oauth/token
     userAuthorizationUri: http://${auth.host}:${auth.port}/oauth/authorize
-    username: u
-    password: p
+    username: 
+    password: 
   resource:
       userInfoUri: http://${api.host}:${api.port}/api/me
 

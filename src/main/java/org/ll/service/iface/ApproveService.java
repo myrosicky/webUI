@@ -3,8 +3,8 @@ package org.ll.service.iface;
 
 import java.util.List;
 
-import org.ll.models.applysystem.Apply;
-import org.ll.models.applysystem.ApproveDO;
+import org.business.models.applysystem.Apply;
+import org.business.models.applysystem.ApproveDO;
 
 public interface ApproveService {
 

@@ -4,43 +4,22 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.business.models.applysystem.Apply;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ll.models.applysystem.Apply;
+import org.ll.config.TestConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(properties={
-		"eureka.client.register-with-eureka=false",
-    	"eureka.client.fetch-registry=false",
-    	"api.port=9091",
-    	"api.context="
-		})
-public class ApplyServiceImplTest {
+public class ApplyServiceImplTest extends TestConfig {
 
 	private final static Logger log = LoggerFactory.getLogger(ApplyServiceImplTest.class);
-	
-	@TestConfiguration
-	public static class TestConfig {
-		
-		private static final Logger log = LoggerFactory.getLogger(TestConfig.class);
-		
-		@Bean
-		RestOperations restTemplate(){
-			if(log.isDebugEnabled()){
-				log.debug("testconfig, customize restTemplate");
-			}
-			return new RestTemplate();
-		}
-	}
 	
 	
 	@Autowired
@@ -57,10 +36,12 @@ public class ApplyServiceImplTest {
 	}
 
 	@Test
+	@WithMockUser(username="f", password="p")
 	public final void testQuery() {
 		Apply apply = new Apply();
 		apply.setCountry("cn");
 		apply.setArea("asia");
+		apply.setProvince("gd");
 		apply.setCity("gz");
 		List<Apply> result = applyService.query(apply);
 		log.debug("result.size():" + result.size());

@@ -2,8 +2,8 @@ package org.ll.controller;
 
 import java.util.List;
 
-import org.ll.models.applysystem.Apply;
-import org.ll.models.applysystem.ApproveDO;
+import org.business.models.applysystem.Apply;
+import org.business.models.applysystem.ApproveDO;
 import org.ll.service.iface.ApproveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
