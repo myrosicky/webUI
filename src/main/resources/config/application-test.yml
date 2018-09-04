@@ -30,8 +30,8 @@ api:
     clientSecret: secret
     accessTokenUri: http://${auth.host}:${auth.port}/oauth/token
     userAuthorizationUri: http://${auth.host}:${auth.port}/oauth/authorize
-    username: 
-    password: 
+    username: u
+    password: llismoon
   resource:
       userInfoUri: http://${api.host}:${api.port}/api/me
 

@@ -21,10 +21,10 @@ public class ApplyServiceImpl implements ApplyService {
     @Autowired
     private FileService fileService;
 
-    public int save(Apply Apply) {
-            int result = callAPIService.post("/applys", int.class, Apply);
-            result = callAPIService.post("/file/upload.do", int.class, fileService.getImage(Apply.getImage()));
-            return result;
+    public int save(Apply apply) {
+    	callAPIService.put("/applys", apply);
+//            callAPIService.put("/files", fileService.getImage(apply.getImage()));
+        return 1;
     }
 
     public int delete(Apply Apply) {
@@ -44,11 +44,10 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public int submit(Apply Apply) {
+    public int submit(Apply apply) {
     	int result = -1;
         try {
-			callAPIService.put("/applys/submit", Apply);
-			result = 1;
+        	result = callAPIService.post("/applys", Integer.class, apply);
 		} catch (Exception e) {
 			result = -1;
 		    log.error(null, e);

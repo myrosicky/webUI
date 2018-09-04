@@ -36,11 +36,11 @@ public class CallAPIService {
 	
 
 	public void delete(String url, Object reqBody) {
-		restTemplate.delete(url, reqBody);
+		restTemplate.delete(buildFullAPIURL(url), reqBody);
 	}
 	
 	public void put(String url, Object reqBody) {
-		restTemplate.put(url, reqBody);
+		restTemplate.put(buildFullAPIURL(url), reqBody);
 	}
 	
 	public <T> T post(String url, Class<T> rtnClass, Object reqBody) {

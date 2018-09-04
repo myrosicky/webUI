@@ -2,6 +2,7 @@ package org.ll.service;
 
 import static org.junit.Assert.fail;
 
+import java.util.Date;
 import java.util.List;
 
 import org.business.models.applysystem.Apply;
@@ -25,10 +26,6 @@ public class ApplyServiceImplTest extends TestConfig {
 	@Autowired
 	private ApplyServiceImpl applyService;
 	
-	@Test
-	public final void testSave() {
-		fail("Not yet implemented"); // TODO
-	}
 
 	@Test
 	public final void testDelete() {
@@ -42,18 +39,62 @@ public class ApplyServiceImplTest extends TestConfig {
 		apply.setCountry("cn");
 		apply.setArea("asia");
 		apply.setProvince("gd");
-		apply.setCity("gz");
+//		apply.setCity("gz");
 		List<Apply> result = applyService.query(apply);
 		log.debug("result.size():" + result.size());
 		for(Apply tmp : result){
 			log.debug(tmp.toString());
 		}
-		
 	}
 
 	@Test
-	public final void testSubmit() {
-		fail("Not yet implemented"); // TODO
+	@WithMockUser(username="f", password="p")
+	public final void testSave4Create() {
+		Apply apply = new Apply()
+		.setCountry("cn")
+		.setArea("asia")
+		.setProvince("gd")
+		.setCity("gz")
+		.setCreateBy("junit")
+		.setCreateTime(new Date())
+		.setIp("127.0.0.1")
+		.setNumber("A1")
+		.setType(Apply.TYPE_INDIVIDUAL)
+		.setUserID(1l)
+		;
+		applyService.save(apply);
+	
+		Apply apply2 = new Apply()
+		.setCountry("cn")
+		.setArea("asia")
+		.setProvince("gd")
+		.setCity("zh")
+		.setCreateBy("junit")
+		.setCreateTime(new Date())
+		.setIp("127.0.0.1")
+		.setNumber("A2")
+		.setType(Apply.TYPE_INDIVIDUAL)
+		.setUserID(1l)
+		;
+		applyService.save(apply2);
 	}
+	
+	@Test
+	@WithMockUser(username="f", password="p")
+	public final void testSave4U() {
+		long id = 0l;
+		Apply apply = new Apply()
+			.setId(id)
+		;
+		List<Apply> applys = applyService.query(apply);
+		if(!applys.isEmpty()){
+			apply = applys.get(0);
+			apply.setUpdateBy("junit");
+			apply.setUpdateTime(new Date());
+			applyService.save(apply);
+		}
+		
+	}
+	
 
 }
