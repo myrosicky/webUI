@@ -2,6 +2,7 @@ package org.ll.service;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.business.models.applysystem.Apply;
 import org.ll.service.common.CallAPIService;
 import org.ll.service.iface.ApplyService;
@@ -40,7 +41,14 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     public List<Apply> query(Apply apply) {
-        return callAPIService.get("/applys/area/" + apply.getArea() + "/country/" + apply.getCountry() + "/province/" + apply.getProvince() + "/city/" + apply.getCity(), List.class, null);
+    	StringBuilder url = 
+    			new StringBuilder("/applys")
+			    	.append("/area").append(StringUtils.isNotBlank(apply.getArea())?("/"+apply.getArea()) : "")
+					.append("/country").append(StringUtils.isNotBlank(apply.getCountry())?("/"+apply.getCountry()) : "")
+    				.append("/province").append(StringUtils.isNotBlank(apply.getProvince())?("/"+apply.getProvince()) : "")
+    				.append("/city").append(StringUtils.isNotBlank(apply.getCity())?("/"+apply.getCity()) : "")
+    			;	
+        return callAPIService.get(url.toString(), List.class, null);
     }
 
     @Override

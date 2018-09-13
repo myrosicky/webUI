@@ -46,3 +46,11 @@ eureka:
 spring:
   profiles:
     active: test
+    
+############## keystore ##############
+keystore:
+  clientCert: 
+    file: webUI.jks
+    password: webUIwebUI
+    alias: mykey
+  
