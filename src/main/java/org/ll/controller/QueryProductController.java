@@ -4,7 +4,7 @@ package org.ll.controller;
 import java.util.List;
 
 import org.ll.model.QueryProductDO;
-import org.ll.service.iface.QueryProductService;
+import org.ll.service.QueryProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package org.ll.service;
+package org.ll.service.impl;
 
 import org.ll.dao.ChatRoomDAO;
 import org.ll.model.ChatCommentDO;
-import org.ll.service.iface.ChatRoomService;
+import org.ll.service.ChatRoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

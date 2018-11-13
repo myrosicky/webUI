@@ -3,7 +3,7 @@ package org.ll.controller;
 import java.util.List;
 
 import org.business.models.applysystem.Apply;
-import org.ll.service.iface.ApplyService;
+import org.ll.service.ApplyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.ll.service.iface;
+package org.ll.service;
 
 import java.util.Date;
 import java.util.List;

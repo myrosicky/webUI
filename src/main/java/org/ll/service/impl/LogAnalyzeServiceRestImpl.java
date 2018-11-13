@@ -1,4 +1,4 @@
-package org.ll.service;
+package org.ll.service.impl;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.ll.model.LogInfoDO;
+import org.ll.service.LogAnalyzeService;
 import org.ll.service.common.CallAPIService;
-import org.ll.service.iface.LogAnalyzeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

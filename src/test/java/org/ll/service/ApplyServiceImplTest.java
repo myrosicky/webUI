@@ -9,6 +9,7 @@ import org.business.models.applysystem.Apply;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ll.config.TestConfig;
+import org.ll.service.impl.ApplyServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

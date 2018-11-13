@@ -1,10 +1,10 @@
-package org.ll.service;
+package org.ll.service.impl;
 
 import java.util.List;
 
 import org.ll.model.MenuDO;
+import org.ll.service.MenuService;
 import org.ll.service.common.CallAPIService;
-import org.ll.service.iface.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
