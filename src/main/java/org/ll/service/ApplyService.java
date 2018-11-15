@@ -12,7 +12,7 @@ public interface ApplyService {
 
     public int delete(Apply Apply);
 
-    public Future<List<Apply>> query(Apply Apply);
+    public List<Apply> query(Apply Apply);
     public List<Apply> queryAll(List<Long> ids);
 
     public int submit(Apply Apply);

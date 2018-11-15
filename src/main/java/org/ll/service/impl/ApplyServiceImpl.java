@@ -48,9 +48,7 @@ public class ApplyServiceImpl implements ApplyService {
         return result;
     }
 
-    @HystrixCollapser(batchMethod = "queryAll",
-    		collapserProperties = {@com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty(name = "timerDelayInMilliseconds",value = "100")})
-    public Future<List<Apply>> query(Apply apply) {
+    public List<Apply> query(Apply apply) {
     	StringBuilder url = 
     			new StringBuilder("/applys")
 			    	.append("/area").append(StringUtils.isNotBlank(apply.getArea())?("/"+apply.getArea()) : "")
@@ -58,8 +56,7 @@ public class ApplyServiceImpl implements ApplyService {
     				.append("/province").append(StringUtils.isNotBlank(apply.getProvince())?("/"+apply.getProvince()) : "")
     				.append("/city").append(StringUtils.isNotBlank(apply.getCity())?("/"+apply.getCity()) : "")
     			;	
-//        return callAPIService.get(url.toString(), List.class, null);
-    	return null;
+        return callAPIService.get(url.toString(), List.class, null);
     }
 
     @Override
@@ -75,7 +72,6 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
 	@Override
-	@HystrixCommand
 	public List<Apply> queryAll(List<Long> ids) {
 		StringBuilder url = 
     			new StringBuilder("/applys?ids=")
