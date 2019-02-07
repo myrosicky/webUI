@@ -3,12 +3,13 @@ package org.ll.context;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.business.models.User;
-import org.business.models.UserRole;
+import javax.servlet.ServletContextListener;
+
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
 import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
@@ -17,7 +18,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
@@ -28,15 +28,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @Configuration
 @EnableWebSecurity
 public class CASSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+		
+		// CAS logout filter should stand before casAuthenticationFilter
+		.addFilterBefore(casLogoutFilter(), casAuthenticationFilter().getClass()) 
 		.addFilter(casAuthenticationFilter())
 		.authorizeRequests()
-		.antMatchers("").permitAll()
+			.antMatchers("").permitAll().and()
+		.exceptionHandling()
+			.authenticationEntryPoint(casAuthenticationEntryPoint())
 		;
 	}
 	
@@ -46,15 +49,6 @@ public class CASSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(casAuthenticationProvider());
 	}
 	
-	@Bean
-	CasAuthenticationProvider casAuthenticationProvider(){
-		CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
-		casAuthenticationProvider.setAuthenticationUserDetailsService(new UserDetailsByNameServiceWrapper(userDetailsService()));
-		casAuthenticationProvider.setServiceProperties(serviceProperties());
-		casAuthenticationProvider.setTicketValidator(new Cas20ServiceTicketValidator("https://localhost:8443/cas"));
-		casAuthenticationProvider.setKey("key4CasAuthenticationProvider");
-		return casAuthenticationProvider;
-	}
 	
 	@Bean
 	protected UserDetailsService userDetailsService(){
@@ -74,26 +68,59 @@ public class CASSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	CasAuthenticationEntryPoint casAuthenticationEntryPoint(ServiceProperties serviceProperties){
+	CasAuthenticationEntryPoint casAuthenticationEntryPoint(){
 		CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
-		casAuthenticationEntryPoint.setLoginUrl("https://localhost:8443/cas/login");
-		casAuthenticationEntryPoint.setServiceProperties(serviceProperties);
+		casAuthenticationEntryPoint.setLoginUrl("https://localhost:8443/cas/login");// CAS server url
+		casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
 		return casAuthenticationEntryPoint;
 	}
 	
 	@Bean
 	ServiceProperties serviceProperties(){
 		ServiceProperties serviceProperties = new ServiceProperties();
+		// the redirect url after CAS logon, add a a new filter to liston on /j_spring_cas_security_check.
 		serviceProperties.setService("http://localhost:9090/j_spring_cas_security_check");
 		return serviceProperties;
 	}
 	
 	@Bean
-	CasAuthenticationFilter casAuthenticationFilter(){
+    @Override
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
+	}
+	
+	@Bean
+	CasAuthenticationFilter casAuthenticationFilter() throws Exception{
 		CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
 		casAuthenticationFilter.setFilterProcessesUrl("/j_spring_cas_security_check");
-		casAuthenticationFilter.setAuthenticationManager(authenticationManager);
+		casAuthenticationFilter.setAuthenticationManager(authenticationManager());
+		return casAuthenticationFilter;
+	}
+	
+	@Bean
+	org.jasig.cas.client.session.SingleSignOutFilter casLogoutFilter(){
+		return new org.jasig.cas.client.session.SingleSignOutFilter();
 	}
 
+	@Bean
+	CasAuthenticationProvider casAuthenticationProvider(){
+		CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
+		casAuthenticationProvider.setAuthenticationUserDetailsService(new UserDetailsByNameServiceWrapper(userDetailsService()));
+		casAuthenticationProvider.setServiceProperties(serviceProperties());
+		
+		// the ticket validation is handled by CAS server, so fill in CAS server root path
+		casAuthenticationProvider.setTicketValidator(new Cas20ServiceTicketValidator("https://localhost:8443/cas"));
+		casAuthenticationProvider.setKey("key4CasAuthenticationProvider");
+		return casAuthenticationProvider;
+	}
+	
+	  @Bean
+	  public ServletListenerRegistrationBean<org.jasig.cas.client.session.SingleSignOutHttpSessionListener> listenerRegistrationBean() {
+	    ServletListenerRegistrationBean<org.jasig.cas.client.session.SingleSignOutHttpSessionListener> bean = 
+	        new ServletListenerRegistrationBean<>();
+	    bean.setListener(new org.jasig.cas.client.session.SingleSignOutHttpSessionListener());
+	    return bean;
+
+	  }
 	
 }
