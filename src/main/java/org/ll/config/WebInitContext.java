@@ -1,4 +1,4 @@
-package org.ll.context;
+package org.ll.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,8 +9,8 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@EnableDiscoveryClient
+//@Configuration
+//@EnableDiscoveryClient
 public class WebInitContext implements ServletContextInitializer {
     
     private static final Logger log = LoggerFactory.getLogger(WebInitContext.class);

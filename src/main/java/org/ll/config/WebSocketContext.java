@@ -1,4 +1,4 @@
-package org.ll.context;
+package org.ll.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

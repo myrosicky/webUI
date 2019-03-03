@@ -1,4 +1,4 @@
-package org.ll.context;
+package org.ll.config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class CASSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
@@ -37,7 +37,9 @@ public class CASSecurityConfig extends WebSecurityConfigurerAdapter {
 		.addFilterBefore(casLogoutFilter(), casAuthenticationFilter().getClass()) 
 		.addFilter(casAuthenticationFilter())
 		.authorizeRequests()
-			.antMatchers("").permitAll().and()
+			.antMatchers("/login**", "/webjars/**", "/css/**", "/js/**").permitAll()
+            .anyRequest().authenticated()
+            .and()
 		.exceptionHandling()
 			.authenticationEntryPoint(casAuthenticationEntryPoint())
 		;

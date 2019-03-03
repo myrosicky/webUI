@@ -1,7 +1,6 @@
 package org.ll.service.impl;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.business.models.applysystem.Apply;
@@ -12,9 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class ApplyServiceImpl implements ApplyService {
