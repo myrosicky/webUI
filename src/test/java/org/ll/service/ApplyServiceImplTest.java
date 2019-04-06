@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ll.config.TestConfig;
 import org.ll.service.impl.ApplyServiceImpl;
+import org.ll.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ApplyServiceImplTest extends TestConfig {
 
 	@Test
 	public final void testDelete() {
-		fail("Not yet implemented"); // TODO
+		
 	}
 
 	@Test
@@ -51,32 +52,32 @@ public class ApplyServiceImplTest extends TestConfig {
 	@Test
 	@WithMockUser(username="f", password="p")
 	public final void testSave4Create() {
-		Apply apply = new Apply()
-		.setCountry("cn")
-		.setArea("asia")
-		.setProvince("gd")
-		.setCity("gz")
-		.setCreateBy("junit")
-		.setCreateTime(new Date())
-		.setIp("127.0.0.1")
-		.setNumber("A1")
-		.setType(Apply.TYPE_INDIVIDUAL)
-		.setUserID(1l)
-		;
+		Apply apply = new Apply();
+		apply.setCountry("cn")              ;
+		apply.setArea("asia")               ;
+		apply.setProvince("gd")             ;
+		apply.setCity("gz")                 ;
+		apply.setCreateBy("junit")          ;
+		apply.setCreateTime(TimeUtil.getCurrentTime())     ;
+		apply.setIp("127.0.0.1")            ;
+		apply.setNumber("A1")               ;
+		apply.setType(Apply.TYPE_INDIVIDUAL);
+		apply.setUserID(1l)                 ;
+		
 		applyService.save(apply);
 	
-		Apply apply2 = new Apply()
-		.setCountry("cn")
-		.setArea("asia")
-		.setProvince("gd")
-		.setCity("zh")
-		.setCreateBy("junit")
-		.setCreateTime(new Date())
-		.setIp("127.0.0.1")
-		.setNumber("A2")
-		.setType(Apply.TYPE_INDIVIDUAL)
-		.setUserID(1l)
-		;
+		Apply apply2 = new Apply();
+		apply2.setCountry("cn")              ;
+		apply2.setArea("asia")               ;
+		apply2.setProvince("gd")             ;
+		apply2.setCity("zh")                 ;
+		apply2.setCreateBy("junit")          ;
+		apply2.setCreateTime(TimeUtil.getCurrentTime())     ;
+		apply2.setIp("127.0.0.1")            ;
+		apply2.setNumber("A2")               ;
+		apply2.setType(Apply.TYPE_INDIVIDUAL);
+		apply2.setUserID(1l)                 ;
+		
 		applyService.save(apply2);
 	}
 	
@@ -84,14 +85,13 @@ public class ApplyServiceImplTest extends TestConfig {
 	@WithMockUser(username="f", password="p")
 	public final void testSave4U() {
 		long id = 0l;
-		Apply apply = new Apply()
-			.setId(id)
-		;
+		Apply apply = new Apply();
+		apply.setId(id);
 		List<Apply> applys = applyService.query(apply);
 		if(!applys.isEmpty()){
 			apply = applys.get(0);
 			apply.setUpdateBy("junit");
-			apply.setUpdateTime(new Date());
+			apply.setUpdateTime(TimeUtil.getCurrentTime());
 			applyService.save(apply);
 		}
 		

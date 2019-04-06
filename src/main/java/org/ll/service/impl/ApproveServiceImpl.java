@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.business.models.applysystem.Apply;
-import org.business.models.applysystem.ApproveDO;
+import org.business.models.applysystem.Approve;
 import org.ll.service.ApproveService;
 import org.ll.service.common.CallAPIService;
 import org.ll.util.Util;
@@ -21,12 +21,12 @@ public class ApproveServiceImpl implements ApproveService {
     @Autowired
     private CallAPIService callAPIService;
 
-    public List<ApproveDO> query(ApproveDO approveDO) {
+    public List<Approve> query(Approve approveDO) {
         return callAPIService.get("/approve/query.do", List.class, Util.convert(approveDO, Map.class));
     }
 
 
-    public List<Apply> queryPendingApply(ApproveDO approveDO) {
+    public List<Apply> queryPendingApply(Approve approveDO) {
         return callAPIService.get("/approve/queryPendingApply.do", List.class, Util.convert(approveDO, Map.class));
     }
 
@@ -41,7 +41,7 @@ public class ApproveServiceImpl implements ApproveService {
     }
 
 
-    public List<ApproveDO> viewApproveHistory(ApproveDO approveDO) {
+    public List<Approve> viewApproveHistory(Approve approveDO) {
         return callAPIService.get("/approve/viewApproveHistory.do", List.class, Util.convert(approveDO, Map.class));
     }
 

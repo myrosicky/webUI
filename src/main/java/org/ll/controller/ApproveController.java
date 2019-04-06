@@ -3,7 +3,7 @@ package org.ll.controller;
 import java.util.List;
 
 import org.business.models.applysystem.Apply;
-import org.business.models.applysystem.ApproveDO;
+import org.business.models.applysystem.Approve;
 import org.ll.service.ApproveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +30,13 @@ public class ApproveController {
 
     @RequestMapping(value = "/query.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ApproveDO> query(ApproveDO approveDO) {
+    public List<Approve> query(Approve approveDO) {
         return approveService.query(approveDO);
     }
 
     @RequestMapping(value = "/queryPendingApply.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<Apply> queryPendingApply(ApproveDO approveDO) {
+    public List<Apply> queryPendingApply(Approve approveDO) {
         return approveService.queryPendingApply(approveDO);
     }
 
@@ -54,7 +54,7 @@ public class ApproveController {
 
     @RequestMapping(value = "/viewApproveHistory.do", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public List<ApproveDO> viewApproveHistory(ApproveDO approveDO) {
+    public List<Approve> viewApproveHistory(Approve approveDO) {
         return approveService.viewApproveHistory(approveDO);
     }
 

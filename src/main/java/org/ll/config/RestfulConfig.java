@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.client.RestTemplateCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,7 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,13 +38,13 @@ public class RestfulConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(RestfulConfig.class);
 
-	@Value("${keystore.clientCert.file}")
+	@Value("${keystore.client-cert.file}")
     private String clientKeystore;
     
-    @Value("${keystore.clientCert.password}")
+    @Value("${keystore.client-cert.password}")
     private String clientKeystorePwd;
     
-    @Value("${keystore.clientCert.alias}")
+    @Value("${keystore.client-cert.alias}")
     private String clientKeystoreAlias;
     
     @Autowired
@@ -49,10 +52,15 @@ public class RestfulConfig {
     
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
+    
+    @Autowired
+    private UserInfoTokenServices tokenServices;
 
 	@Bean
     OAuth2RestOperations restTemplate(RestTemplateBuilder builder) {
     	
+		log.info("tokenServices:" + tokenServices);
+		
     	return builder.additionalCustomizers(new RestTemplateCustomizer(){
 
 			@Override
@@ -83,5 +91,6 @@ public class RestfulConfig {
     		
     	}).configure(new OAuth2RestTemplate(apiClient, oauth2ClientContext));
     }
+	
     
 }
